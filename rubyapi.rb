@@ -14,7 +14,7 @@ module RubyAPI
     end
 
     def self.to_native(value, ctx)
-      RubyAPI.to_native(super.address)
+      RubyAPI.to_native(value)
     end
   end
 
