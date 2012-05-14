@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/Burgestrand/rubyapi"
 
   gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.test_files    = ["rubyapi_spec.rb"]
   gem.require_paths = ["."]
   gem.extensions    = ["extconf.rb"]
   gem.version       = "1.0.0"
