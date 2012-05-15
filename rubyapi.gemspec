@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = ["rubyapi_spec.rb"]
   gem.require_paths = ["."]
   gem.extensions    = ["extconf.rb"]
-  gem.version       = "1.0.0"
+  gem.version       = "1.0.1"
 
   gem.add_dependency 'ffi'
 end

@@ -8,6 +8,8 @@ require 'stringio'
 def capture_stdout
   old_stdout, $stdout = $stdout, StringIO.new
   yield
+  $stdout.rewind
+  $stdout.read
 ensure
   $stdout = old_stdout
 end

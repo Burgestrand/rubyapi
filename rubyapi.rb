@@ -14,9 +14,17 @@ module RubyAPI
     end
 
     def self.to_native(value, ctx)
-      RubyAPI.to_native(value)
+      FFI::Pointer.new(RubyAPI.to_native(value))
     end
   end
 
   typedef VALUE, :object
+end
+
+class Object
+  # This is a bit of a dangerous hack, as FFI will now accept any
+  # object as a pointer argument anywhere. This renders the FFI type
+  # checking useless for pointers.
+  def to_ptr
+  end
 end
