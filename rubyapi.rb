@@ -5,6 +5,15 @@ module RubyAPI
   extend FFI::Library
   ffi_lib FFI::CURRENT_PROCESS
 
+  module ObjectExtension
+    # This is a bit of a dangerous hack, as FFI will now accept any
+    # object as a pointer argument anywhere. This renders the FFI type
+    # checking useless for pointers.
+    def to_ptr
+      FFI::Pointer.new(RubyAPI.to_native(self))
+    end
+  end
+
   class VALUE
     extend FFI::DataConverter
     native_type FFI::Type::POINTER
@@ -14,17 +23,11 @@ module RubyAPI
     end
 
     def self.to_native(value, ctx)
-      FFI::Pointer.new(RubyAPI.to_native(value))
+      value.to_ptr
     end
   end
 
   typedef VALUE, :object
 end
 
-class Object
-  # This is a bit of a dangerous hack, as FFI will now accept any
-  # object as a pointer argument anywhere. This renders the FFI type
-  # checking useless for pointers.
-  def to_ptr
-  end
-end
+Object.send(:include, RubyAPI::ObjectExtension)
